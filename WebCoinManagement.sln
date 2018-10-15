@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoinManagement", "WebCoinManagement\WebCoinManagement.csproj", "{2A1A0217-CB83-4000-A031-224A465E46FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoinManagement.Tests", "WebCoinManagement.Tests\WebCoinManagement.Tests.csproj", "{D5A47D37-FAEF-4FB7-9052-4F180CD65054}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A1A0217-CB83-4000-A031-224A465E46FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1A0217-CB83-4000-A031-224A465E46FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1A0217-CB83-4000-A031-224A465E46FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A1A0217-CB83-4000-A031-224A465E46FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A47D37-FAEF-4FB7-9052-4F180CD65054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A47D37-FAEF-4FB7-9052-4F180CD65054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A47D37-FAEF-4FB7-9052-4F180CD65054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A47D37-FAEF-4FB7-9052-4F180CD65054}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7F4CB4A-3930-4581-9852-E83E9EA003B4}
+	EndGlobalSection
+EndGlobal
