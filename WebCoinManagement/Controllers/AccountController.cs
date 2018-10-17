@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -12,46 +13,61 @@ namespace WebCoinManagement.Controllers
     {
         // GET: Login page starting page
         public ActionResult Index() {
-            if(Session["username"] != null && Session["password"] != null) {
-                return View();
+            if(Session["username"] != null) {
+
+                if(Session["isAdmin"] != null && Session["isAdmin"].Equals("1"))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+
+                return RedirectToAction("Index", "User");
             }
 
             return View("Login");
         }
 
         //POST: Login action
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(LoginInformation loginInformation) {
-            Task<Boolean> verificationTask =  VerifyLoginInformation(loginInformation);
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            Task<Users> verificationTask =  VerifyLoginInformation(loginInformation);
             verificationTask.Wait();
 
-            if(verificationTask.Result) {
-                Session["username"] = loginInformation.Username;
-                Session["password"] = loginInformation.Password;
-                return View("Index");
+            Users resultUser = verificationTask.Result;
+            
+            if(resultUser != null) {
+                var claims = new List<Claim> {new Claim(ClaimTypes.Name, resultUser.Username),
+                    new Claim(ClaimTypes.Role, resultUser.UserRole)};
+                var id = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+                var owinContext = Request.GetOwinContext();
+                var authenticationManager = owinContext.Authentication;
+                authenticationManager.SignIn(id);
+
+                return RedirectToAction("Index", "User");
             }
 
             return View();
         }
 
-        public ActionResult Logout() {
-            Session.RemoveAll();
-            return View("Login");
-        }
-
-        private Task<Boolean> VerifyLoginInformation(LoginInformation loginInformation) {
+        private Task<Users> VerifyLoginInformation(LoginInformation loginInformation) {
             CoinManagementContext coinManagementContext = new CoinManagementContext();
             var foundUser = coinManagementContext.Users.SingleOrDefault(user => user.Username.Equals(loginInformation.Username));
 
             if(foundUser != null) {
                 if(foundUser.Password.Equals(loginInformation.Password)) { //next iteration encryption
-                    return Task.FromResult<Boolean>(true);
+                    return Task.FromResult<Users>(foundUser);
                 } else {
-                    return Task.FromResult<Boolean>(false);
+                    return Task.FromResult<Users>(null);
                 }
             } 
 
-            return Task.FromResult<Boolean>(false);
+            return Task.FromResult<Users>(null);
         }
+
     }
 }

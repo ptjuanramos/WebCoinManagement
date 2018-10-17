@@ -29,7 +29,7 @@
                     <span class="btn-show-pass">
                         <i class="fa fa-eye"></i>
                     </span>
-                    @Html.TextBox("Password", null, new { @class = "input100" })
+                    @Html.Password("Password", null, new { @class = "input100" })
                     <span class="focus-input100"></span>
                 </div>
                 @Html.ValidationMessageFor(P => P.Password)

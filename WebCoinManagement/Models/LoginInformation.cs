@@ -11,5 +11,7 @@ namespace WebCoinManagement.Models {
 
         [Required]
         public String Password { get; set; }
+
+        public String UserRole { get; set; }
     }
 }
