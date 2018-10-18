@@ -8,10 +8,6 @@ namespace WebCoinManagement.Controllers
 {
     public class UserController : BasePortalController
     {
-        [Authorize(Roles = RolesConstants.NORMAL)]
-        public ActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

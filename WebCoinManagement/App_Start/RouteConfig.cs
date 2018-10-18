@@ -15,6 +15,8 @@ namespace WebCoinManagement {
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Account", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.LowercaseUrls = true;
         }
     }
 }
