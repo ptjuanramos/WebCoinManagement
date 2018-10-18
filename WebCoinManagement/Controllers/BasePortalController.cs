@@ -8,11 +8,22 @@ namespace WebCoinManagement.Controllers
 {
     public class BasePortalController : Controller
     {
-        [AllowAnonymous]
+
+        public ActionResult Index()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Account");
+        }
+
+        [Authorize]
         public ActionResult Logout()
         {
             CleanAuthenticationSession();
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Account");
         }
 
         private void CleanAuthenticationSession()

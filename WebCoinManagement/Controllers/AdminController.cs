@@ -7,16 +7,10 @@ using WebCoinManagement.Models;
 
 namespace WebCoinManagement.Controllers
 {
+    [Authorize(Roles = RolesConstants.ADMIN)]
     public class AdminController : BasePortalController
     {
-        // GET: Portal
-        [Authorize(Roles = "ADMIN")]
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-        [Authorize(Roles = "ADMIN")]
         public ActionResult SignupUser(Users userToSignup)
         {
             //TODO
