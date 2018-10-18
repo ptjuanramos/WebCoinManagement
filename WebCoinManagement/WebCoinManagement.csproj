@@ -184,6 +184,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BasePortalController.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Models\CoinsCategory.cs" />
     <Compile Include="Models\LoginInformation.cs" />
     <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\Views\Admin\Home.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1491,6 +1493,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Views\Normal\" />
     <Folder Include="Views\BasePortal\" />
   </ItemGroup>
   <ItemGroup>

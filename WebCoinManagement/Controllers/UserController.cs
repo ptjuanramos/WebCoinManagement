@@ -8,7 +8,7 @@ namespace WebCoinManagement.Controllers
 {
     public class UserController : BasePortalController
     {
-        [Authorize(Roles = "NORMAL")]
+        [Authorize(Roles = RolesConstants.NORMAL)]
         public ActionResult Index()
         {
             return View();
