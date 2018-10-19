@@ -27,8 +27,8 @@ namespace WebCoinManagement {
                     "~/Scripts/Portal/plugins.js",
                     "~/Scripts/Portal/main.js",
                     "~/Scripts/Portal/lib/chart-js/Chart.bundle.js",
-                    "~/Scripts/Portal/lib/chart-js/dashboard.js",
-                    "~/Scripts/Portal/lib/chart-js/widgets.js",
+                    "~/Scripts/Portal/dashboard.js",
+                    "~/Scripts/Portal/widgets.js",
                     "~/Scripts/Portal/lib/vector-map/jquery.vmap.js",
                     "~/Scripts/Portal/lib/vector-map/jquery.vmap.min.js",
                     "~/Scripts/Portal/lib/vector-map/jquery.vmap.sampledata.js",
@@ -46,6 +46,7 @@ namespace WebCoinManagement {
                 ));
 
             bundles.Add(new StyleBundle("~/Content/portal").Include(
+                    "~/Content/Portal/scss/widgets.css",
                     "~/Content/Portal/css/normalize.css",
                     "~/Content/Portal/css/bootstrap.min.css",
                     "~/Content/Portal/css/font-awesome.min.css",

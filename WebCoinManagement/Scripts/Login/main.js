@@ -17,17 +17,7 @@
             }
         }
 
-        if (check) {
-            $.ajax({
-                url: "Login/Login",
-                data: { Username: "", Password: "" },
-                type: "POST"
-            }).done(function () {
-                return true;
-            });
-        } else {
-            return false;
-        }
+        return false;
 
     });
 

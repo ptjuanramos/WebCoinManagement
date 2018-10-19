@@ -12,6 +12,7 @@ namespace WebCoinManagement.Models {
         public virtual DbSet<Coins> Coins { get; set; }
         public virtual DbSet<CoinsCategory> CoinsCategory { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<FriendsList> FriendsLists { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Entity<Coins>()
@@ -56,6 +57,10 @@ namespace WebCoinManagement.Models {
                 .IsUnicode(false);
 
             modelBuilder.Entity<Users>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Users>()
                 .Property(e => e.Password)
                 .IsUnicode(false);
 
@@ -74,6 +79,12 @@ namespace WebCoinManagement.Models {
                 .WithRequired(e => e.Users)
                 .HasForeignKey(e => e.UserID)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<FriendsList>()
+                .Property(e => e.FriendOwner);
+
+            modelBuilder.Entity<FriendsList>()
+                .Property(e => e.Friend);
         }
     }
 }

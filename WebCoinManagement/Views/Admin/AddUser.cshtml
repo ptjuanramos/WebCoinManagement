@@ -1,8 +1,54 @@
-﻿
+﻿@model WebCoinManagement.Models.Users
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Adicionar Utilizador";
 }
 
-<h2>Adicionar Utilizador</h2>
+<div class="content mt-3">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Adicionar utilizador</strong>
+            </div>
+            @{Html.EnableClientValidation();}
+            @using (Html.BeginForm("Add", "AddUser", FormMethod.Post, new { @id = "addUserForm" }))
+            {
+                <div class="card-body card-block">
 
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Username</label></div>
+                        <div class="col-12 col-md-9">
+                            @Html.TextBox("Username", null, new { @class = "form-control", @placeholder = "Inserir Username", @id = "text-input" })
+                            @Html.ValidationMessageFor(U => U.Username)
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="email-input" class=" form-control-label">Email</label></div>
+                        <div class="col-12 col-md-9">
+                            @Html.TextBox("Email", null, new { @class = "form-control", @placeholder = "Inserir E-mail", @id = "text-input" })
+                            @Html.ValidationMessageFor(U => U.Email)
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="select" class=" form-control-label">Permissão</label></div>
+                        <div class="col-12 col-md-9">
+                            @{ var adminRoles = ViewBag.Message; }
+                            @Html.DropDownListFor(U => U.UserRole, new SelectList(adminRoles), "Selecione uma opção", new { @class = "form-control", @id = "select" })
+                            @Html.ValidationMessageFor(U => U.UserRole)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>

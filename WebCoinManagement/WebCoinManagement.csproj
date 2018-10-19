@@ -186,20 +186,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AddUserController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\BasePortalController.cs" />
+    <Compile Include="Controllers\OutOfBoxController.cs" />
+    <Compile Include="Controllers\CollectionItemListController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UsersPermissionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CoinManagementContext.cs" />
     <Compile Include="Models\Coins.cs" />
     <Compile Include="Models\CoinsCategory.cs" />
+    <Compile Include="Models\FriendsList.cs" />
     <Compile Include="Models\LoginInformation.cs" />
     <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\Views\Admin\AddUser.cs" />
     <Compile Include="Models\Views\Admin\Home.cs" />
+    <Compile Include="Models\Views\ChangePasswordInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\EmailService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -1491,11 +1496,11 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Admin\AddUser.cshtml" />
+    <Content Include="Views\Shared\_EmptyLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Views\Normal\" />
-    <Folder Include="Views\AddUser\" />
     <Folder Include="Views\BasePortal\" />
   </ItemGroup>
   <ItemGroup>
@@ -1508,6 +1513,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

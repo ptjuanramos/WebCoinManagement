@@ -53,7 +53,8 @@ namespace WebCoinManagement.Controllers
 
         private Task<Users> VerifyLoginInformation(LoginInformation loginInformation) {
             CoinManagementContext coinManagementContext = new CoinManagementContext();
-            var foundUser = coinManagementContext.Users.SingleOrDefault(user => user.Username.Equals(loginInformation.Username));
+            var foundUser = coinManagementContext.Users
+                .SingleOrDefault(user => user.Username.Equals(loginInformation.Username) || user.Email.Equals(loginInformation.Username));
 
             if (foundUser != null) {
                 if (foundUser.Password.Equals(loginInformation.Password)) { //next iteration encryption
