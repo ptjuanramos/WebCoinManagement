@@ -8,13 +8,23 @@ using WebCoinManagement.Models;
 namespace WebCoinManagement.Controllers
 {
     [Authorize(Roles = RolesConstants.ADMIN)]
-    public class AdminController : BasePortalController
+    public class AdminController : UserController
     {
-
-        public ActionResult SignupUser(Users userToSignup)
-        {
-            //TODO
+        public ActionResult UserList() {
             return View();
         }
+
+        public ActionResult AddUser() {
+            return View();
+        }
+
+        public ActionResult RemoveUser() {
+            return View();
+        }
+
+        public ActionResult UsersPemissions() {
+            return View();
+        }
+
     }
 }
