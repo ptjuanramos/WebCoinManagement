@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using WebCoinManagement.Models;
+using WebCoinManagement.Models.Views.Admin;
+using WebCoinManagement.Services;
 
 namespace WebCoinManagement.Controllers
 {
@@ -13,7 +15,24 @@ namespace WebCoinManagement.Controllers
     public class AdminController : UserController
     {
         public ActionResult UserList() {
-            return View();
+            using (CoinManagementContext coinManagementContext = new CoinManagementContext())
+            {
+                List<Users> users = coinManagementContext.Users.ToList();
+                List<UserListItem> items = new List<UserListItem>();
+
+                foreach (Users user in users)
+                {
+                    UserListItem item = new UserListItem();
+                    item.Name = user.Name;
+                    item.Role = user.UserRole;
+                    item.NumberOfItems = 0; //TODO
+                    item.NumberOfTrades = 0; //TODO
+                    items.Add(item);
+                }
+
+                ViewBag.Message = items;
+                return View();
+            }
         }
 
         public ActionResult AddUser() {
@@ -35,14 +54,37 @@ namespace WebCoinManagement.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddUser(Users newUser)
+        public ActionResult AddUser(Users newUser)
         {
+            ModelState.Remove("Password");
+            newUser.Password = UserService.GenerateTemporaryPassword();
+
             if (ModelState.IsValid)
             {
-                return View(); //TODO
+                Task<Users> addedUserTask = AddUserTask(newUser);
+                addedUserTask.Wait();
+                Users addedUser = addedUserTask.Result;
+
+                if(addedUser == null || addedUser.ID == null)
+                {
+                    return View(); //TODO - error Message
+                }
+
+                return RedirectToAction("UserList"); //TODO - sucess message
             }
 
-            return View();
+            return View(); //TODO - error Message
+        }
+
+        private Task<Users> AddUserTask(Users newUser)
+        {
+            using(CoinManagementContext coinManagementContext = new CoinManagementContext())
+            {
+                Users returnUser = coinManagementContext.Users.Add(newUser);
+                coinManagementContext.SaveChanges();
+                return Task.FromResult<Users>(returnUser);
+            }
+
         }
 
         public ActionResult RemoveUser() {

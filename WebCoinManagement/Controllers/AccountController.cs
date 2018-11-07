@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 using WebCoinManagement.Models;
+using WebCoinManagement.Models.OutOfBox;
 
 namespace WebCoinManagement.Controllers
 {
@@ -27,7 +30,8 @@ namespace WebCoinManagement.Controllers
                 return View();
             }
 
-            Task<Users> verificationTask = VerifyLoginInformation(loginInformation);
+            Task<Users> verificationTask = null;
+            verificationTask = VerifyLoginInformation(loginInformation);
             verificationTask.Wait();
 
             Users resultUser = verificationTask.Result;
@@ -42,7 +46,8 @@ namespace WebCoinManagement.Controllers
                 if (resultUser.UserRole.Equals("ADMIN"))
                 {
                     return RedirectToAction("Index", "Admin");
-                } else
+                }
+                else
                 {
                     return RedirectToAction("Index", "User");
                 }
@@ -52,17 +57,30 @@ namespace WebCoinManagement.Controllers
         }
 
         private Task<Users> VerifyLoginInformation(LoginInformation loginInformation) {
-            CoinManagementContext coinManagementContext = new CoinManagementContext();
-            var foundUser = coinManagementContext.Users
-                .SingleOrDefault(user => user.Username.Equals(loginInformation.Username) || user.Email.Equals(loginInformation.Username));
-
-            if (foundUser != null) {
-                if (foundUser.Password.Equals(loginInformation.Password)) { //next iteration encryption
-                    return Task.FromResult<Users>(foundUser);
-                } else {
+            using (CoinManagementContext coinManagementContext = new CoinManagementContext())
+            {
+                Users foundUser;
+                try
+                {
+                    foundUser = coinManagementContext.Users.SingleOrDefault(user => user.Username.Equals(loginInformation.Username) || user.Email.Equals(loginInformation.Username));
+                } catch(InvalidOperationException ex)
+                {
                     return Task.FromResult<Users>(null);
                 }
-            }
+
+                if (foundUser != null)
+                {
+                    if (foundUser.Password.Equals(loginInformation.Password))
+                    { //next iteration encryption
+                        return Task.FromResult<Users>(foundUser);
+                    }
+                    else
+                    {
+                        return Task.FromResult<Users>(null);
+                    }
+                }
+                
+            }  
 
             return Task.FromResult<Users>(null);
         }

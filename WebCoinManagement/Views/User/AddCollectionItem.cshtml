@@ -1,0 +1,90 @@
+﻿@model WebCoinManagement.Models.Coins
+@{
+    ViewBag.Title = "Adicionar item à coleção";
+}
+
+<div class="content mt-3">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Adicionar utilizador</strong>
+            </div>
+            @{Html.EnableClientValidation();}
+            @using (Html.BeginForm("AddCollectionItem", "User", FormMethod.Post, new { @id = "addUserForm" }))
+            {
+            <div class="card-body card-block">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Categoria do item</label></div>
+                    <div class="col-12 col-md-9">
+                        @{ var coinCategories = ViewBag.Message["coinCategory"]; }
+                        @Html.DropDownListFor(C => C.CoinType, new SelectList(coinCategories), "Selecione uma opção", new { @class = "form-control", @id = "select" })
+                        @Html.ValidationMessageFor(C => C.Counter)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Número de items</label></div>
+                    <div class="col-12 col-md-9">
+                        @Html.TextBox("Name", null, new { @class = "form-control", @placeholder = "Inserir número de items", @id = "text-input" })
+                        @Html.ValidationMessageFor(C => C.Counter)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Username</label></div>
+                    <div class="col-12 col-md-9">
+                        @Html.TextBox("Name", null, new { @class = "form-control", @placeholder = "Inserir Username", @id = "text-input" })
+                        @Html.ValidationMessageFor(C => C.Description)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Email</label></div>
+                    <div class="col-12 col-md-9">
+                        @Html.TextBox("Email", null, new { @class = "form-control", @placeholder = "Inserir E-mail", @id = "text-input" })
+                        @{ var coinTypes = ViewBag.Message["coinTypes"]; }
+                        @Html.DropDownListFor(C => C.CoinType, new SelectList(coinTypes), "Selecione uma opção", new { @class = "form-control", @id = "select" })
+                        @Html.ValidationMessageFor(C => C.CoinType)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Email</label></div>
+                    <div class="col-12 col-md-9">
+                        @Html.TextBox("Email", null, new { @class = "form-control", @placeholder = "Inserir E-mail", @id = "text-input" })
+                        @Html.ValidationMessageFor(C => C.FacialValue)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Email</label></div>
+                    <div class="col-12 col-md-9">
+                        @Html.TextBox("Email", null, new { @class = "form-control", @placeholder = "Inserir E-mail", @id = "text-input" })
+                        @Html.ValidationMessageFor(C => C.MarketValue)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Email</label></div>
+                    <div class="col-12 col-md-9">
+                        @Html.TextBox("Email", null, new { @class = "form-control", @placeholder = "Inserir E-mail", @id = "text-input" })
+                        @Html.ValidationMessageFor(C => C.Country)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Email</label></div>
+                    <div class="col-12 col-md-9">
+                        @Html.TextBox("Email", null, new { @class = "form-control", @placeholder = "Inserir E-mail", @id = "text-input" })
+                        @Html.ValidationMessageFor(C => C.CoinDate)
+                    </div>
+                </div>
+
+            </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+

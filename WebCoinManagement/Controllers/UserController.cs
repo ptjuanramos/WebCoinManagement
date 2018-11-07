@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebCoinManagement.Models;
+using WebCoinManagement.Services;
 
 namespace WebCoinManagement.Controllers
 {
@@ -43,8 +45,39 @@ namespace WebCoinManagement.Controllers
             return View();
         }
 
-        public ActionResult CollectionItemList()
+        public ActionResult CollectionItemsList()
         {
+            return View();
+        }
+
+        public ActionResult AddCollectionCategory()
+        {
+            return View();
+        }
+
+        public ActionResult AddCollectionCategory(CoinsCategory coinsCategory)
+        {
+            return View(); //TODO
+        }
+
+        public ActionResult AddFriend()
+        {
+            return View();
+        }
+
+        public ActionResult AddFriend(string username)
+        {
+            using(CoinManagementContext coinManagementContext = new CoinManagementContext())
+            {
+                string currentUsername = User.Identity.Name;
+                FriendsList friendsList = new FriendsList();
+                friendsList.FriendOwner = UserService.GetUserIdByUsername(currentUsername);
+                friendsList.Friend = UserService.GetUserIdByUsername(username);
+
+                coinManagementContext.FriendsLists.Add(friendsList);
+            }
+
+            //TODO - view friend added
             return View();
         }
     }

@@ -7,6 +7,7 @@ using WebCoinManagement.Models.Views;
 
 namespace WebCoinManagement.Controllers
 {
+    [AllowAnonymous]
     public class OutOfBoxController : Controller
     {
         // GET: ChangePassword

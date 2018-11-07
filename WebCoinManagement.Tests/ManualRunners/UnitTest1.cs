@@ -20,8 +20,14 @@ namespace WebCoinManagement.Tests.ManualRunners {
         public void FetchUserData() {
             CoinManagementContext coinManagementContext = new CoinManagementContext();
             List<Users> usersList = coinManagementContext.Users.ToList();
+            List<Coins> coinsList = coinManagementContext.Coins.ToList();
             foreach(Users user in usersList) {
                 Debug.WriteLine("Name of the user: " + user.Name);
+            }
+            
+            foreach(Coins coin in coinsList)
+            {
+                Debug.WriteLine("Coin user id: " + coin.UserID);
             }
         }
     }

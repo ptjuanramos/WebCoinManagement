@@ -80,11 +80,6 @@ namespace WebCoinManagement.Models {
                 .HasForeignKey(e => e.UserID)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<FriendsList>()
-                .Property(e => e.FriendOwner);
-
-            modelBuilder.Entity<FriendsList>()
-                .Property(e => e.Friend);
         }
     }
 }
